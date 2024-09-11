@@ -7,7 +7,8 @@
 	"settings": {
 		"git.ignoreLimitWarning": true,
 		"files.associations": {
-			"iostream": "cpp"
+			"iostream": "cpp",
+			"ostream": "cpp"
 		}
 	},
 	"launch": {
