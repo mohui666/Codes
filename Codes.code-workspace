@@ -8,7 +8,12 @@
 		"git.ignoreLimitWarning": true,
 		"files.associations": {
 			"iostream": "cpp",
-			"ostream": "cpp"
+			"ostream": "cpp",
+			"vector": "cpp",
+			"xstring": "cpp",
+			"initializer_list": "cpp",
+			"utility": "cpp",
+			"xutility": "cpp"
 		}
 	},
 	"launch": {
