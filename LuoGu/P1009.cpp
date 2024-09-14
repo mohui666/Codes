@@ -28,11 +28,13 @@ void facSum(int a,int m[],int n[])
             }
         }
     }
+
     int nBegin = 300;
     while(!n[nBegin]&&nBegin>1)
     {
         nBegin--;
     }
+    
     for(int i = nBegin;i>=1;i--)
     {
         cout << n[i];
