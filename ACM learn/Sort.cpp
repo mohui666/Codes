@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
+#include <cstring>
 using namespace std;
 
 void bubbleSort(vector<int>& vec)
@@ -107,6 +109,29 @@ void ShellSort(vector<int>& vec)
     }
 }
 
+void CountSort(vector<int>& vec)
+{
+    int maxx = *max_element(vec.begin(), vec.end());
+    int* countArr = new int[maxx+1];
+    memset(countArr,0,sizeof(int)*(maxx+1));
+    for(int i = 0;i<vec.size();i++)
+    {
+        countArr[vec[i]]++;
+    }
+
+    vec.clear();
+    for(int i = 0;i<=maxx;i++)
+    {
+        while(countArr[i])
+        {
+            vec.push_back(i);
+            countArr[i]--;
+        }
+    }
+
+    delete[] countArr;
+}
+
 void print(vector<int>& vec)
 {
     for(auto& i : vec)
@@ -118,6 +143,6 @@ void print(vector<int>& vec)
 int main()
 {
     vector<int> vec {1,4,5,6,8,7,3,9,2};
-    ShellSort(vec);
+    CountSort(vec);
     print(vec);
 }
