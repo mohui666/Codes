@@ -200,6 +200,57 @@ void HeapSort(vector<int>& vec)
     }
 }
 
+void QuickSort(vector<int>& vec,int l,int r)
+{
+    if(l>=r)
+    {
+        return;
+    }
+    int tmp = vec[l];
+    int i = l,j=r;
+    while(i<j)
+    {
+        while(i<j&&vec[j]>tmp)
+        {
+            j--;
+        }
+        if(i<j)
+        {
+            vec[i] = vec[j];
+            i++;
+        }
+        while(i<j&&vec[i]<tmp)
+        {
+            i++;
+        }
+        if(i<j)
+        {
+            vec[j] = vec[i];
+            j--;
+        }
+    }
+    vec[i]=tmp;
+    QuickSort(vec,l,i-1);
+    QuickSort(vec,i+1,r);
+}
+
+void Merge_up2down(vector<int>& vec,int l,int r)
+{
+    if(l>=r)
+    {
+        return;
+    }
+    int mid =(l+r)/2;
+    Merge_up2down(vec,l,mid);
+    Merge_up2down(vec,mid+1,r);
+    MergeSort(vec,l,mid,r);
+}
+
+void MergeSort(vector<int>& vec,int l,int mid,int r)
+{
+    
+}
+
 void print(vector<int>& vec)
 {
     for(auto& i : vec)
@@ -211,6 +262,6 @@ void print(vector<int>& vec)
 int main()
 {
     vector<int> vec {1,4,5,6,8,7,3,9,2,165,848,154,57,41,415,64,87,87,88,481,1,7,87,7,8,77,15,78,95,451,3,564,87,54,641,34,678,94,561,234,5678,6};
-    HeapSort(vec);
+    QuickSort(vec,0,vec.size()-1);
     print(vec);
 }
