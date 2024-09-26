@@ -132,6 +132,74 @@ void CountSort(vector<int>& vec)
     delete[] countArr;
 }
 
+void BucketSort(vector<int>& vec)
+{
+    //时间复杂度（快排/归并）：O(N+C)  C=(n*(logn-logm)) m为桶的数量
+    //空间复杂度（快排）：O(N+M); N：桶空间 M：排序空间
+    //稳定性：取决于所选择的排序
+
+    int maxx = *max_element(vec.begin(),vec.end());
+    int minx = *min_element(vec.begin(),vec.end());
+    int bucketNum=(maxx-minx+1)/vec.size()+1;
+    vector<vector<int>> Buckets(bucketNum);
+    for(int i = 0;i<vec.size();i++)
+    {
+        int index = (vec[i]-minx+1)/vec.size();
+        Buckets[index].push_back(vec[i]);
+    }
+    for(int i = 0;i<Buckets.size();i++)
+    {
+        sort(Buckets[i].begin(),Buckets[i].end());
+    }
+
+    vec.clear();
+    for(int i = 0;i<Buckets.size();i++)
+    {
+        for(int j = 0;j<Buckets[i].size();j++)
+        {
+            vec.push_back(Buckets[i][j]);
+        }
+    }
+}
+
+void BuildMaxHeap(vector<int>& vec,int start,int end)
+{
+    int cur = start;
+    int l = 2*cur + 1;
+    for(;l<=end;cur=l,l = 2*cur + 1)
+    {
+        if(l<end&&vec[l]<vec[l+1])
+        {
+            l++;
+        }
+        if(vec[l]>vec[cur])
+        {
+            swap(vec[l],vec[cur]);
+        }
+        else
+        {
+            break;
+        }
+    }
+
+}
+
+void HeapSort(vector<int>& vec)
+{
+    //时间复杂度：O(nlogn)
+    //空间复杂度：O(1)
+    //稳定性：
+    for(int i = vec.size()/2-1;i>=0;i--)
+    {
+        BuildMaxHeap(vec,i,vec.size()-1);
+    }
+    for(int i = vec.size()-1;i>0;i--)
+    {
+        swap(vec[0],vec[i]);
+        BuildMaxHeap(vec,0,i-1);
+    }
+}
+
 void print(vector<int>& vec)
 {
     for(auto& i : vec)
@@ -142,7 +210,7 @@ void print(vector<int>& vec)
 
 int main()
 {
-    vector<int> vec {1,4,5,6,8,7,3,9,2};
-    CountSort(vec);
+    vector<int> vec {1,4,5,6,8,7,3,9,2,165,848,154,57,41,415,64,87,87,88,481,1,7,87,7,8,77,15,78,95,451,3,564,87,54,641,34,678,94,561,234,5678,6};
+    HeapSort(vec);
     print(vec);
 }
