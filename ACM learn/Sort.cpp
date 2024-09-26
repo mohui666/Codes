@@ -188,7 +188,7 @@ void HeapSort(vector<int>& vec)
 {
     //时间复杂度：O(nlogn)
     //空间复杂度：O(1)
-    //稳定性：
+    //稳定性：不稳定
     for(int i = vec.size()/2-1;i>=0;i--)
     {
         BuildMaxHeap(vec,i,vec.size()-1);
