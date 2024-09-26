@@ -202,6 +202,9 @@ void HeapSort(vector<int>& vec)
 
 void QuickSort(vector<int>& vec,int l,int r)
 {
+    //时间复杂度：O(nlogn)
+    //空间复杂度：O(logn)
+    //稳定性：不稳定
     if(l>=r)
     {
         return;
@@ -234,6 +237,40 @@ void QuickSort(vector<int>& vec,int l,int r)
     QuickSort(vec,i+1,r);
 }
 
+void MergeSort(vector<int>& vec,int l,int mid,int r)
+{ 
+    //时间复杂度：O(nlogn)
+    //空间复杂度：O(nlogn)
+    //稳定性：稳定
+    int *tmp = new int[r-l+1];
+    int i = l,j=mid+1,index=0;
+    while(i<=mid&&j<=r)
+    {
+        if(vec[i]<=vec[j])
+        {
+            tmp[index++]=vec[i++];
+        }
+        else
+        {
+            tmp[index++]=vec[j++];
+        }
+        
+    }
+    while(i<=mid)
+    {
+        tmp[index++] = vec[i++];
+    }
+    while(j<=r)
+    {
+        tmp[index++] = vec[j++];
+    }
+    for(int i = 0;i<index;i++)
+    {
+        vec[l+i] = tmp[i];
+    }
+    delete[] tmp;
+}
+
 void Merge_up2down(vector<int>& vec,int l,int r)
 {
     if(l>=r)
@@ -244,11 +281,6 @@ void Merge_up2down(vector<int>& vec,int l,int r)
     Merge_up2down(vec,l,mid);
     Merge_up2down(vec,mid+1,r);
     MergeSort(vec,l,mid,r);
-}
-
-void MergeSort(vector<int>& vec,int l,int mid,int r)
-{
-    
 }
 
 void print(vector<int>& vec)
@@ -262,6 +294,6 @@ void print(vector<int>& vec)
 int main()
 {
     vector<int> vec {1,4,5,6,8,7,3,9,2,165,848,154,57,41,415,64,87,87,88,481,1,7,87,7,8,77,15,78,95,451,3,564,87,54,641,34,678,94,561,234,5678,6};
-    QuickSort(vec,0,vec.size()-1);
+    Merge_up2down(vec,0,vec.size()-1);
     print(vec);
 }
