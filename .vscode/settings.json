@@ -8,6 +8,9 @@
         "algorithm": "cpp",
         "ostream": "cpp",
         "format": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "limits": "cpp",
+        "ios": "cpp",
+        "xiosbase": "cpp"
     }
 }
