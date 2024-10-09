@@ -1,27 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int n,m,x,y;
-const int N = 450;
-int step[N][N];
-
 typedef pair<int,int> PII;
 
-queue<PII> q;
+const int N = 410;
+
+int n,m,x,y;
+int step[N][N];
+PII q[N*N];
 
 int dx[]={1,1,-1,-1,2,2,-2,-2};
 int dy[]={2,-2,2,-2,1,-1,1,-1};
 
 void bfs(int x1,int y1)
 {
-    q.push({x1,y1});
+    q[0] = {x1,y1};
     step[x1][y1] = 0;
+    int hh = 0,tt = 0;
 
-    while(q.size())
+    while(hh<=tt)
     {
-        auto t = q.front();
-        q.pop();
-        for(int i = 0;i<=7;i++)
+        auto t = q[hh++];
+        
+        for(int i = 0;i<8;i++)
         {
             int a = t.first+dx[i];
             int b = t.second+dy[i];
@@ -35,10 +36,11 @@ void bfs(int x1,int y1)
                 continue;
             }
 
-            q.push({a,b});
-            step[a][b] = step[t.first][t.second] + 1;
+            q[++tt] = {a,b};
+            step[a][b] = step[t.first][t.second] + 1; 
         }
     }
+
 }
 
 int main()

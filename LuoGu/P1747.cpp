@@ -1,32 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int n,m,x,y;
-const int N = 450;
+const int N = 50;
 int step[N][N];
 
 typedef pair<int,int> PII;
 
 queue<PII> q;
 
-int dx[]={1,1,-1,-1,2,2,-2,-2};
-int dy[]={2,-2,2,-2,1,-1,1,-1};
+int dx[]={1,1,-1,-1,2,2,-2,-2,2,2,-2,-2};
+int dy[]={2,-2,2,-2,1,-1,1,-1,2,-2,2,-2};
 
-void bfs(int x1,int y1)
+void bfs(int x,int y)
 {
-    q.push({x1,y1});
-    step[x1][y1] = 0;
+    memset(step,-1,sizeof(step));
+    q.push({x,y});
+    step[x][y] = 0;
 
     while(q.size())
     {
         auto t = q.front();
         q.pop();
-        for(int i = 0;i<=7;i++)
+        for(int i = 0;i<12;i++)
         {
             int a = t.first+dx[i];
             int b = t.second+dy[i];
 
-            if(a<1||a>n||b<1||b>m)
+            if(a<1||b<1)
             {
                 continue;
             }
@@ -37,21 +37,23 @@ void bfs(int x1,int y1)
 
             q.push({a,b});
             step[a][b] = step[t.first][t.second] + 1;
+            if(a==1&&b==1)
+            {
+                return;
+            }
         }
     }
 }
 
+
 int main()
 {
-    scanf("%d%d%d%d",&n,&m,&x,&y);
-    memset(step,-1,sizeof step);
+    int x,y;
+    scanf("%d %d",&x,&y);
     bfs(x,y);
-    for(int i = 1;i<=n;i++)
-    {
-        for(int j = 1;j<=m;j++)
-        {
-            printf("%d ",step[i][j]);
-        }
-        printf("\n");
-    }
+    q= queue<PII>();
+    printf("%d\n",step[1][1]);
+    scanf("%d %d",&x,&y);
+    bfs(x,y);
+    printf("%d\n",step[1][1]);
 }
