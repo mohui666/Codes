@@ -8,7 +8,8 @@ int s = 0;
 int main()
 {
     int m;
-    if (scanf("%d", &m) != 1) {
+    if (scanf("%d", &m) != 1) 
+    {
         printf("Invalid input\n");
         return -1;
     }
